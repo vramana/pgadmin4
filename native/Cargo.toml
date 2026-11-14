@@ -1,0 +1,24 @@
+[package]
+name = "pgadmin4-native"
+version = "0.1.0"
+edition = "2024"
+license = "PostgreSQL"
+description = "Native pgAdmin 4 desktop shell built with Rune"
+publish = false
+
+[[bin]]
+name = "pgadmin4"
+path = "src/main.rs"
+
+[dependencies]
+# Rune is pre-release: pin one `dev` rev and bump it on purpose.
+rune = { git = "https://github.com/anomalyco/rune", rev = "9b60212d242c10ccd4bc27a9baab7589d4494e78" }
+uuid = { version = "1", features = ["v4"] }
+
+# Rune patches these crates; a dependency's [patch] doesn't reach this workspace, so repeat them
+# from the same rev (see "Depending on Rune" in Rune's crates/rune/README.md).
+[patch.crates-io]
+winit = { git = "https://github.com/anomalyco/rune", rev = "9b60212d242c10ccd4bc27a9baab7589d4494e78" }
+parley_engine = { git = "https://github.com/anomalyco/rune", rev = "9b60212d242c10ccd4bc27a9baab7589d4494e78" }
+wgpu-hal = { git = "https://github.com/anomalyco/rune", rev = "9b60212d242c10ccd4bc27a9baab7589d4494e78" }
+accesskit_windows = { git = "https://github.com/anomalyco/rune", rev = "9b60212d242c10ccd4bc27a9baab7589d4494e78" }
